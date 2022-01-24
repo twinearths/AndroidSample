@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/topFrament"
-        android:name="jp.co.twinearths.androidsample.TopFrament"
+        android:name="jp.co.twinearths.androidsample.TopFragment"
         android:label="fragment_top"
         tools:layout="@layout/fragment_top" >
         <action
