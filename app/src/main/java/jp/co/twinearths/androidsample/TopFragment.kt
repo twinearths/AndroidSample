@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -20,29 +22,16 @@ class TopFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_top, container, false)
+        // Inflate the layout for this fragment
+        val view = inflater.inflate(R.layout.fragment_top, container, false)
+        val mTextView = view.findViewById<TextView>(R.id.textView)
+        mTextView.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_topFrament_to_secondFragment)
+        }
+
+        return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val textList = mutableListOf(
-            TableData(RecyclerAdapter.HEADER_TYPE,"魚"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"マグロ"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"カツオ"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"サンマ"),
-            TableData(RecyclerAdapter.HEADER_TYPE,"果物"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"リンゴ"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"イチゴ"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"ナシ"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"ミカン"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"スイカ"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"オレンジ"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"イチジク"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"モモ"),
-            TableData(RecyclerAdapter.ITEM_TYPE,"マンゴー"),
-        )
-
-        recyclerView = view.findViewById(R.id.RecyclerList)
-        recyclerView.adapter = context?.let { RecyclerAdapter(it,textList) }
-        recyclerView.layoutManager = LinearLayoutManager(context)
-    }
+      }
 }
