@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.Navigation
 
 class TopFragment : Fragment() {
 
@@ -42,7 +44,11 @@ class TopFragment : Fragment() {
         )
 
         recyclerView = view.findViewById(R.id.RecyclerList)
-        recyclerView.adapter = context?.let { RecyclerAdapter(it,textList) }
+        val adapter = context?.let { RecyclerAdapter(it,textList, listener = {
+            val bundle = bundleOf("title" to it)
+            Navigation.findNavController(view).navigate(R.id.action_topFrament_to_secondFragment, bundle)
+        }) }
+        recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
     }
 }

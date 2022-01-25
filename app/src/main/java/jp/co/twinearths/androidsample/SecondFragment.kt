@@ -19,8 +19,10 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        val title = arguments?.getString("title")
         val view = inflater.inflate(R.layout.fragment_second, container, false)
         val mTextView = view.findViewById<TextView>(R.id.textView2)
+        mTextView.text = title
         mTextView.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_secondFragment_to_topFrament)
         }

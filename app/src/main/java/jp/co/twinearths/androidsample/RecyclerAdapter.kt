@@ -2,10 +2,14 @@ package jp.co.twinearths.androidsample
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerAdapter(private val context: Context, private val list: MutableList<TableData>) :
+class RecyclerAdapter(private val context: Context,
+                      private val list: MutableList<TableData>,
+                      private val listener:(String) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val HEADER_TYPE = 1
@@ -25,9 +29,16 @@ class RecyclerAdapter(private val context: Context, private val list: MutableLis
                 LayoutInflater.from(context).inflate(R.layout.header_recycleview, parent, false)
             )
         } else  { // if (viewType == ITEM_TYPE)
-            ItemViewHolder(
-                LayoutInflater.from(context).inflate(R.layout.item_recyclerview, parent, false)
-            )
+            val inflater = LayoutInflater.from(parent.context)
+            val view: View = inflater.inflate(R.layout.item_recyclerview, parent, false)
+
+            val viewHolder = ItemViewHolder(view)
+            view.setOnClickListener {
+                val position = viewHolder.adapterPosition
+                listener(list[position].textTitle)
+            }
+
+            viewHolder
         }
     }
     // それぞれのItemの中身を設定
