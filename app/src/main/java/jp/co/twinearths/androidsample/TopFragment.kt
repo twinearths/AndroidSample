@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 class TopFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -21,17 +20,7 @@ class TopFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_top, container, false)
-        val mTextView = view.findViewById<TextView>(R.id.textView)
-        mTextView.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_topFrament_to_secondFragment)
-        }
-
-        return view
+        return inflater.inflate(R.layout.fragment_top, container, false)
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-      }
 }
