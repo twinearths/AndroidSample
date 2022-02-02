@@ -2,7 +2,7 @@ package jp.co.twinearths.androidsample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -12,15 +12,15 @@ import jp.co.twinearths.androidsample.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val bottomTabBar: BottomNavigationView = binding.bottomTabBar
-        val navController = findNavController(R.id.fragment)
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.topFragment, R.id.secondFragment, R.id.thirdFragment))
-        setupActionBarWithNavController(navController,appBarConfiguration)
-        bottomTabBar.setupWithNavController(navController)
-
+        setupActionBarWithNavController(navHost.navController,appBarConfiguration)
+        bottomTabBar.setupWithNavController(navHost.navController)
     }
 }
